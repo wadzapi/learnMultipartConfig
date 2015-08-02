@@ -30,7 +30,7 @@
     <name>testMultipartConfig</name>
     <description>A custom project used to explore MultipartConfig setting in Tomcat servltet container</description>
     <url>http://localhost:8080/testMultipartConfig</url>
-
+    <!-- TODO  Разобраться с зависимостями. Почистить излишнее. Задеплоить общее на серваке. -->
     <properties>
         <jsf-myfaces.version>2.2.8</jsf-myfaces.version>
     </properties>
@@ -75,35 +75,28 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_2.5_spec</artifactId>
-            <version>1.2</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-el_2.2_spec</artifactId>
-            <version>1.0.2</version>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-el-api</artifactId>
+            <version>7.0.61</version>
             <scope>provided</scope>
         </dependency>
         
         <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-annotation_1.0_spec</artifactId>
-            <version>1.1.1</version>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-annotations-api</artifactId>
+            <version>7.0.61</version>
             <scope>provided</scope>
         </dependency>
         
         <!-- JSF API: Add here as provided dependency and then add it
              on jetty-maven-plugin as compile/runtime dependency.
              The same goes for other JSF libraries. -->
-<!--        <dependency>
+        <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-api</artifactId>
             <version>${jsf-myfaces.version}</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -116,9 +109,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-            <!-- Задеплоил на серваке в lib -->
             <scope>provided</scope>
-            <!--<scope>runtime</scope>-->
         </dependency>
 
 <!-- Раскоментировать после реализации юнит-тестов -->
@@ -161,9 +152,7 @@
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-impl</artifactId>
             <version>${jsf-myfaces.version}</version>
-            <!-- TODO Можно задеплоить на серваке в lib ?? -->
-            <!--<scope>runtime</scope>-->
-            <scope>provided</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
            <groupId>org.slf4j</groupId>
@@ -176,6 +165,17 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.12</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.3</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.3</version>
         </dependency>
     </dependencies>
 </project>

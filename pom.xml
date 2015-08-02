@@ -98,28 +98,31 @@
         <!-- JSF API: Add here as provided dependency and then add it
              on jetty-maven-plugin as compile/runtime dependency.
              The same goes for other JSF libraries. -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-api</artifactId>
             <version>${jsf-myfaces.version}</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
             <version>7.0.61</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+            <!-- Задеплоил на серваке в lib -->
+            <scope>provided</scope>
             <!--<scope>runtime</scope>-->
         </dependency>
 
-
-        <dependency>
+<!-- Раскоментировать после реализации юнит-тестов -->
+<!--        <dependency>
             <groupId>org.apache.myfaces.test</groupId>
             <artifactId>myfaces-test22</artifactId>
             <version>1.0.7</version>
@@ -146,7 +149,7 @@
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
@@ -158,12 +161,21 @@
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-impl</artifactId>
             <version>${jsf-myfaces.version}</version>
-            <scope>runtime</scope>
+            <!-- TODO Можно задеплоить на серваке в lib ?? -->
+            <!--<scope>runtime</scope>-->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+           <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.12</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.12</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

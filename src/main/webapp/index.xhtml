@@ -29,12 +29,12 @@
     <h:outputStylesheet name="style.css" library="css"/>
     <div id="container">
         <h1>Проект изучения MultiPartConfig</h1>
-        <h:form id="mainForm">
-            <h:panelGrid columns="2">
+        <h:form id="mainForm" prependId="false" enctype="multipart/form-data">
+            <h:panelGroup>
                 <h:inputFile value="#{uploadBean.uploadedFile}" label="Выберите файл для загрузки"/>
-                <h:commandButton action="" value="Загрузить"/>
+                <h:commandButton action="#{uploadBean.handleUploadedFile}" value="Загрузить"/>
                 <h:messages showDetail="true" showSummary="false"/>
-            </h:panelGrid>
+            </h:panelGroup>
         </h:form>
     </div>
 </h:body>

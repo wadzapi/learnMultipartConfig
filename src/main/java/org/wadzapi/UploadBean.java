@@ -30,9 +30,6 @@ import java.io.InputStream;
 public class UploadBean
 {
     private static Logger log = LoggerFactory.getLogger(UploadBean.class);
-    static {
-        log.trace("Constructing UploadBean");
-    }
 
     private Part uploadedFile;
 

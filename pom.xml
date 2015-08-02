@@ -152,7 +152,7 @@
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-impl</artifactId>
             <version>${jsf-myfaces.version}</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Log4j over sjf4j dependencies -->

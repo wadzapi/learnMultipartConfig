@@ -22,19 +22,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
+<f:loadBundle var="multipartConfig" basename="org.wadzapi.multipart_config"/>
 <h:head>
-    <title>Проект изучения MultiPartConfig</title>
+    <title>
+        <h:outputText value="#{multipartConfig.multipartProjectTitle}"/>
+    </title>
 </h:head>
 <h:body>
     <h:outputStylesheet name="style.css" library="css"/>
+    <!-- TODO Отсыпать верстки -->
     <div id="container">
-        <h1>Проект изучения MultiPartConfig</h1>
-        <h:form id="mainForm" prependId="false" enctype="multipart/form-data">
-            <h:panelGroup>
-                <h:inputFile value="#{uploadBean.uploadedFile}" label="Выберите файл для загрузки"/>
-                <h:commandButton action="#{uploadBean.handleUploadedFile}" value="Загрузить"/>
-                <h:messages showDetail="true" showSummary="false"/>
-            </h:panelGroup>
+        <h1><h:outputText value="#{multipartConfig.multipartProjectTitle}"/></h1>
+        <h:form id="facesServletUpload" prependId="false" enctype="multipart/form-data">
+            <h2><h:outputText value="#{multipartConfig.faceletFileUploadTitle}"/></h2>
+            <h:inputFile value="#{uploadBean.uploadedFile}" label="Выберите файл для загрузки"/>
+            <h:commandButton action="#{uploadBean.handleUploadedFile}" value="Загрузить"/>
+            <h:messages showDetail="true" showSummary="false"/>
         </h:form>
     </div>
 </h:body>

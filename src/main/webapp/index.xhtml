@@ -29,7 +29,9 @@
     </title>
 </h:head>
 <h:body>
-    <h:outputStylesheet name="style.css" library="css"/>
+    <h:outputStylesheet name="style.css" library="css" />
+    <h:outputScript library="js" value="jquery-2.1.1.js" />
+    <h:outputScript library="js" value="jquery-ui.min.js"/>
     <!-- TODO Отсыпать верстки -->
     <div id="container">
         <h1><h:outputText value="#{multipartConfig.multipartProjectTitle}"/></h1>

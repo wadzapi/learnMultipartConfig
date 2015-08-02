@@ -44,27 +44,12 @@ public class UploadBean
         }
         try {
             log.info("Начало" + baseLogMsg);
-            printFileInfo(uploadedFile);
+            UploadFileUtils.printFileInfo(uploadedFile);
+            //UploadFileUtils.saveFile(uploadedFile);
             log.info("Конец" + baseLogMsg);
         } catch (Exception e) {
             log.error("Ошибка" + baseLogMsg);
         }
-    }
-
-
-    private static void printFileInfo(Part uploadedPart) {
-        log.debug("Filename: " + uploadedPart.getName());
-        log.debug("Content-type: " + uploadedPart.getContentType());
-        log.debug("Size: " + uploadedPart.getSize());
-        log.debug("Headers: ");
-        for (String fileHeaderName : uploadedPart.getHeaderNames()) {
-            log.debug(fileHeaderName + ": " + uploadedPart.getHeader(fileHeaderName));
-        }
-    }
-
-    private static void saveFile(Part uploadedFile) throws IOException {
-        InputStream fileStream = uploadedFile.getInputStream();
-        //create buffered stream to ByteArrayInputStream and save to disk or DB
     }
 
     public void setUploadedFile(Part uploadedFile) {

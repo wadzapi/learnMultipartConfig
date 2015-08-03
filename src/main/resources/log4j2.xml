@@ -12,7 +12,7 @@
         <Logger name="org.wadzapi.UploadBean" level="TRACE">
             <AppenderRef ref="uploadLog"/>
         </Logger>
-        <Root level="error">
+        <Root level="DEBUG">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

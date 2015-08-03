@@ -41,7 +41,7 @@
             <h:commandButton action="#{uploadBean.handleUploadedFile}" value="#{multipartConfig.load_by} Faces Servlet"/>
             <h:messages showDetail="true" showSummary="false"/>
         </h:form>
-        <h:form id="servletUpload" prependId="false" enctype="multipart/form-data">
+        <h:form id="servletUpload" action="/fileUpload" prependId="false" enctype="multipart/form-data">
             <h2><h:outputText value="#{multipartConfig.servletFileUploadTitle}"/></h2>
             <h:inputFile value="#{uploadBean.uploadedFile}" label="#{multipartConfig.choose_upload_file}"/>
             <h:commandButton action="#{uploadBean.handleUploadedFile}" value="#{multipartConfig.load_by} Upload Servlet"/>

@@ -22,14 +22,18 @@ public class UploadServlet extends HttpServlet {
     private static Logger log = org.slf4j.LoggerFactory.getLogger(UploadServlet.class);
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Do get");
+        super.doGet(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String baseLogMsg = " загрузки файла через сервлет.";
         try {
             log.info("Начало" + baseLogMsg);
-            for (Part uploadedFile : req.getParts()) {
-                UploadFileUtils.printFileInfo(uploadedFile);
-                //UploadFileUtils.saveFile(uploadedFile);
-            }
+            //UploadFileUtils.saveFile(uploadedFile);
+            req.getParts().forEach(UploadFileUtils::printFileInfo);
             //getServletContext().getRequestDispatcher("/response.jsp").forward(req, resp);
             log.info("Конец" + baseLogMsg);
         } catch (Exception e) {

@@ -1,5 +1,4 @@
 .idea/
-deployScripts/
 *.iml
 target/
 node_modules.tar

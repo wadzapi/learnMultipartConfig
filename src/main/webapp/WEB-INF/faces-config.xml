@@ -24,4 +24,7 @@
     <factory>
         <exception-handler-factory>org.wadzapi.CustomHandlerFactory</exception-handler-factory>
     </factory>
+    <lifecycle>
+        <phase-listener>org.wadzapi.FailedRequestPhaseListener</phase-listener>
+    </lifecycle>
 </faces-config>

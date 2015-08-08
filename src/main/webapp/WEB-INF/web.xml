@@ -53,7 +53,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <!-- See http://myfaces.apache.org/docindex.html for documentation 
          about MyFaces Projects -->
     <!-- See http://myfaces.apache.org/core21/myfaces-impl/webconfig.html 
-         for an updated list of web config parameters for MyFaces Core 
+         for an updated list of web config parameters for MyFaces Core
          See http://wiki.apache.org/myfaces/Secure_Your_Application
          for instructions about how to secure your web application -->
     <context-param>
@@ -92,9 +92,9 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
         <multipart-config>
-            <max-file-size>1048576</max-file-size>
-            <max-request-size>1048576</max-request-size>
-            <file-size-threshold>1048576</file-size-threshold>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>-1</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
         </multipart-config>
     </servlet>
 
@@ -103,37 +103,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
-
-    <!-- A filter that sets character encoding that is used to decode -->
-    <!-- parameters in a POST request -->
-    <filter>
-        <filter-name>setCharacterEncodingFilter</filter-name>
-        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-        <async-supported>true</async-supported>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <!-- A filter that triggers request parameters parsing and rejects the    -->
-    <!-- request if some parameters were skipped because of parsing errors or -->
-    <!-- request size limitations.                                            -->
-    <filter>
-        <filter-name>failedRequestFilter</filter-name>
-        <filter-class>org.apache.catalina.filters.FailedRequestFilter</filter-class>
-        <async-supported>true</async-supported>
-    </filter>
-
-    <!-- The mapping for the Set Character Encoding Filter -->
-    <filter-mapping>
-        <filter-name>setCharacterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!-- The mapping for the Failed Request Filter -->
-    <filter-mapping>
-        <filter-name>failedRequestFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <!-- Welcome files -->
     <welcome-file-list>
@@ -158,6 +127,10 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <error-page>
         <error-code>400</error-code>
         <location>/errors/400.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>413</error-code>
+        <location>/errors/413.xhtml</location>
     </error-page>
     <error-page>
         <exception-type>java.lang.IllegalStateException</exception-type>

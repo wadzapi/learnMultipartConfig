@@ -57,6 +57,6 @@ public class FailedRequestPhaseListener implements PhaseListener {
 
     @Override
     public PhaseId getPhaseId() {
-        return PhaseId.ANY_PHASE;
+        return PhaseId.RESTORE_VIEW;
     }
 }

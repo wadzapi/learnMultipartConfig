@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.MessageFormat;
 
-
+/**
+ * Слушатель фазы Restore view для отслеживания загружаемых файлов, превышающих максимально допустимый размер
+ */
 public class FailedRequestPhaseListener implements PhaseListener {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadBean.class);
-    ;
 
     @Override
     public void afterPhase(PhaseEvent event) {
@@ -34,6 +35,8 @@ public class FailedRequestPhaseListener implements PhaseListener {
         if (request.getAttribute(Globals.PARAMETER_PARSE_FAILED_ATTR) != null) {
             String contentType = request.getContentType();
             final String sndErrorMsg = "Отправлен ответ с кодом HTTP-состояния {0} ({1})";
+            //TODO После перехода на tomcat 7.0.64 возможно более точно определить причину поломки
+            //Изменения войдут и в FailedRequestFilter - его применение более целесообразно (см. svn.apache.org/r1694437 или https://bz.apache.org/bugzilla/show_bug.cgi?id=58031)
             try {
                 if (contentType != null && contentType.contains("multipart/form-data")) {
                     logger.warn("Ошибка при обработке параметров и данных Multipart-запроса");

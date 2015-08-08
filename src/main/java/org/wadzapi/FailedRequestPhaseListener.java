@@ -1,6 +1,8 @@
 package org.wadzapi;
 
 import org.apache.catalina.Globals;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.event.PhaseEvent;
@@ -9,11 +11,13 @@ import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.MessageFormat;
 
 
 public class FailedRequestPhaseListener implements PhaseListener {
 
-    private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UploadBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(UploadBean.class);
+    ;
 
     @Override
     public void afterPhase(PhaseEvent event) {
@@ -21,36 +25,38 @@ public class FailedRequestPhaseListener implements PhaseListener {
 
     @Override
     public void beforePhase(PhaseEvent event) {
-        logger.debug("before APPLY_REQUEST_VALUES");
+        final String logMsg = "{0} обнаружения загружаемых файлов с размером, превышающим уставленный лимит на фазе {1}";
+        logger.debug(MessageFormat.format(logMsg, "Начало", event.getPhaseId().getName()));
         ExternalContext ctx = event.getFacesContext().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) ctx.getRequest();
         HttpServletResponse response = (HttpServletResponse) ctx.getResponse();
         request.getParameter("none");
         if (request.getAttribute(Globals.PARAMETER_PARSE_FAILED_ATTR) != null) {
             String contentType = request.getContentType();
+            final String sndErrorMsg = "Отправлен ответ с кодом HTTP-состояния {0} ({1})";
             try {
                 if (contentType != null && contentType.contains("multipart/form-data")) {
-                    logger.debug("Multipart request parsing failed");
-                    logger.debug("sendError SC_REQUEST_ENTITY_TOO_LARGE begin");
+                    logger.warn("Ошибка при обработке параметров и данных Multipart-запроса");
                     response.sendError(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-                    logger.debug("sendError SC_REQUEST_ENTITY_TOO_LARGE end");
+                    logger.debug(MessageFormat.format(sndErrorMsg, "SC_REQUEST_ENTITY_TOO_LARGE", HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE));
                 } else {
-                    logger.debug("Request parameters parsing failed");
-                    logger.debug("sendError SC_BAD_REQUEST begin");
+                    logger.warn("Ошибка при обработке параметров и данных запроса");
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                    logger.debug("sendError SC_BAD_REQUEST end");
+                    logger.debug(MessageFormat.format(sndErrorMsg, "SC_BAD_REQUEST", HttpServletResponse.SC_BAD_REQUEST));
                 }
             } catch (IOException e) {
+                logger.debug(MessageFormat.format(logMsg, "Ошибка", event.getPhaseId().getName()));
                 e.printStackTrace();
             } finally {
                 event.getFacesContext().responseComplete();
-                logger.debug("finally in before APPLY_REQUEST_VALUES");
+                logger.trace("Отправка responseComplete для текущего FacesContext-а");
             }
         }
+        logger.debug(MessageFormat.format(logMsg, "Конец", event.getPhaseId().getName()));
     }
 
     @Override
     public PhaseId getPhaseId() {
-        return PhaseId.APPLY_REQUEST_VALUES;
+        return PhaseId.ANY_PHASE;
     }
 }

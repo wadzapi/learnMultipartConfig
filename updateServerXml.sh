@@ -1,0 +1,1 @@
+deployScripts/updateServerXml.sh

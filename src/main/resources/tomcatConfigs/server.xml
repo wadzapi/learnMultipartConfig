@@ -69,9 +69,18 @@
          Define a non-SSL HTTP/1.1 Connector on port 8080
     -->
     <Connector port="8080" protocol="HTTP/1.1"
-               connectionTimeout="20000"
+               connectionTimeout="60000"
                redirectPort="8443"
-               maxSwallowSize="-1"/>
+               maxSwallowSize="10485760"
+               connectionLinger='60000'
+               socket.soLingerOn="true"
+               socket.soLingerTime="60000"
+               socket.soTimeout="60000"
+               socket.soKeepAlive="true"
+               keepAliveTimeout="60000"
+               connectionUploadTimeout="60000"
+               disableUploadTimeout="false"
+               />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -84,11 +93,15 @@
          style configuration. When using the APR/native implementation, the
          OpenSSL style configuration is required as described in the APR/native
          documentation -->
-    <!--
-    <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+<!--    <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
                maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
-               clientAuth="false" sslProtocol="TLS" />
-    -->
+               clientAuth="false" sslProtocol="TLS"                maxSwallowSize="10485760"
+               connectionLinger='100'
+               socket.soLingerOn="true"
+               socket.soLingerTime="100"
+               socket.soTimeout="100"
+               socket.soKeepAlive="true"
+               keepAliveTimeout="100"/>-->
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />

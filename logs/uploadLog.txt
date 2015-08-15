@@ -1,0 +1,4 @@
+23:12:18.396 [http-bio-8080-exec-13] INFO  org.wadzapi.UploadBean - Начало сохранения загруженного файла
+23:12:18.401 [http-bio-8080-exec-13] INFO  org.wadzapi.UploadBean - Конец сохранения загруженного файла
+23:46:48.989 [http-bio-8080-exec-5] INFO  org.wadzapi.UploadBean - Начало сохранения загруженного файла
+23:46:49.004 [http-bio-8080-exec-5] INFO  org.wadzapi.UploadBean - Конец сохранения загруженного файла
